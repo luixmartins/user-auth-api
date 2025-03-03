@@ -1,0 +1,35 @@
+{
+  "name": "user-auth-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/http/server.ts",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luixmartins/user-auth-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luixmartins/user-auth-api/issues"
+  },
+  "homepage": "https://github.com/luixmartins/user-auth-api#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.9",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@sequelize/mysql": "^7.0.0-alpha.45",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "sequelize": "^6.37.5",
+    "uuid": "^11.1.0",
+    "vitest": "^3.0.7"
+  }
+}
