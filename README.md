@@ -6,6 +6,7 @@ This project implements a simple API with CRUD functions for users and a JWT-bas
 
 - **User CRUD**: Create, Read, Update, and Delete user information.
 - **JWT Authentication**: Secure endpoints with JSON Web Tokens.
+- **Unit Testing**: Unit tests using Vitest.
 
 ## Getting Started
 
@@ -31,6 +32,20 @@ This project implements a simple API with CRUD functions for users and a JWT-bas
     or
     ```sh
     yarn install
+    ```
+
+### Configuration 
+
+1. This implementation uses MySQL as the database and Sequelize as the ORM.
+2. Create a MySQL database for the project.
+3. Check the `models` folder for the database schema and models configuration.
+4. Create a [.env](http://_vscodecontentref_/0) file in the root directory and add your database configuration:
+    ```env
+    DATABASE=  
+    USER= 
+    PASSWORD=
+    HOST=
+    PORT=
     ```
 
 ### Running the Server
