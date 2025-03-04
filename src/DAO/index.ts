@@ -109,3 +109,5 @@ const DAO = {
         }
     }
 }
+
+export default DAO;

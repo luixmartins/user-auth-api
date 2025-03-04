@@ -19,6 +19,7 @@
   "homepage": "https://github.com/luixmartins/user-auth-api#readme",
   "description": "",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.9",
     "tsx": "^4.19.3",
@@ -26,6 +27,7 @@
   },
   "dependencies": {
     "@sequelize/mysql": "^7.0.0-alpha.45",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "sequelize": "^6.37.5",
