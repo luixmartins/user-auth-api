@@ -1,0 +1,7 @@
+GET http://localhost:3000/user 
+Content-Type: application/json
+
+{ 
+    "email": "elysama@gmail.com", 
+    "password": "98539013"
+}

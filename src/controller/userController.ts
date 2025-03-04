@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import UserModel from "../models/user"
 import DAO from "../DAO/index"
+import Auth from "../service/auth"
 
 const generateHash = async (password: string) => {
     return await bcrypt.hash(password, 10);
@@ -39,7 +40,7 @@ const userController = {
 
             if (response.status === 500) {
                 return response;
-            } else { 
+            } else {
                 if (response.body.length === 0) {
                     return {
                         status: 404,
@@ -50,9 +51,19 @@ const userController = {
                     const isPasswordCorrect = await compareHash(password, userFound.password);
 
                     if (isPasswordCorrect) {
+                        const authToken =  Auth.generateToken({
+                            id: userFound.id,
+                            email: userFound.email
+                        });
+
                         return {
                             status: 200,
-                            body: userFound
+                            body: { 
+                                authToken: authToken, 
+                                id: userFound.id,
+                                name: userFound.name,
+                                email: userFound.email
+                            }
                         };
                     } else {
                         return {
