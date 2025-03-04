@@ -29,4 +29,18 @@ router.get('/home', authenticated, (req: Request, res: Response) => {
     res.send('Welcome to the home page');
 });
 
+router.put('/', authenticated, (req: Request, res: Response) => {
+    const response = userController.updateUser(req.body);
+    
+    response.then((response) => {
+        res.status(response.status).send(response.body);
+    });
+}); 
+
+router.delete('/delete', authenticated, (req: Request, res: Response) => { 
+    const response = userController.deleteUser(req.body)
+
+    res.send(response)
+})
+
 export default router;

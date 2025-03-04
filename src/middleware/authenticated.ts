@@ -17,7 +17,7 @@ const authenticated = (req: Request, res: Response, next: NextFunction): void =>
             res.status(401).send(responseFromAuth.body);
             return; 
         } else { 
-            req.body = responseFromAuth; 
+            req.body.auth = responseFromAuth; 
 
             next();
         }
