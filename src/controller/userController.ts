@@ -35,43 +35,36 @@ const userController = {
         // This function is responsible for getting a user by email, it receives an object with the email and password and returns a response object
         const email = data.email;
         const password = data.password;
-        
+
         try {
             const response = await DAO.selectData(`SELECT * FROM users WHERE email = '${email}'`);
 
-            if (response.status === 500) {
-                return response;
-            } else {
-                if (response.body.length === 0) {
+            if (!response.body) return response;
+
+            else {
+                const userFound = response.body[0];
+                const isPasswordCorrect = await compareHash(password, userFound.password);
+
+                if (isPasswordCorrect) {
+                    const authToken = Auth.generateToken({
+                        id: userFound.id,
+                        email: userFound.email
+                    });
+
                     return {
-                        status: 404,
-                        body: 'User not found'
+                        status: 200,
+                        body: {
+                            authToken: authToken,
+                            id: userFound.id,
+                            name: userFound.name,
+                            email: userFound.email
+                        }
                     };
                 } else {
-                    const userFound = response.body[0];
-                    const isPasswordCorrect = await compareHash(password, userFound.password);
-
-                    if (isPasswordCorrect) {
-                        const authToken = Auth.generateToken({
-                            id: userFound.id,
-                            email: userFound.email
-                        });
-
-                        return {
-                            status: 200,
-                            body: {
-                                authToken: authToken,
-                                id: userFound.id,
-                                name: userFound.name,
-                                email: userFound.email
-                            }
-                        };
-                    } else {
-                        return {
-                            status: 401,
-                            body: 'Invalid password'
-                        };
-                    }
+                    return {
+                        status: 401,
+                        body: 'Invalid password'
+                    };
                 }
             }
         } catch (error) {
@@ -101,22 +94,22 @@ const userController = {
                 body: error
             };
         }
-    }, 
+    },
 
-    async deleteUser(data: any){ 
-        try { 
+    async deleteUser(data: any) {
+        try {
             const query = `DELETE FROM users WHERE id = '${data.auth.id}'`
 
             const response = await DAO.deleteData(query)
 
             console.log(response)
 
-            return response; 
-        } catch (error) { 
-            console.error('Error deleting user:', error) 
+            return response;
+        } catch (error) {
+            console.error('Error deleting user:', error)
 
             return {
-                status: 500, 
+                status: 500,
                 body: error
             }
         }

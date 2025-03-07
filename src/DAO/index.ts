@@ -5,7 +5,7 @@ import sequelize from '../config/database';
 interface ResponseFromDatabase {
     status: number;
     message: string;
-    body?: {}
+    body?: any
 }
 
 const errorMessage = (error: any) => { 
@@ -71,8 +71,9 @@ const DAO = {
             await sequelize.authenticate();
 
             try {
-                await sequelize.query(query, { type: QueryTypes.UPDATE });
+                const response = await sequelize.query(query, { type: QueryTypes.UPDATE });
 
+                console.log(response)
                 return {
                     status: 204,
                     message: "Data has been updated"
