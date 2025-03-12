@@ -22,6 +22,8 @@ router.post('/login', async (req: Request, res: Response) => {
     const data = req.body
     const response = await userController.getUserByEmail(data);
 
+    console.log(response)
+
     res.status(response.status).send(response.body);
 });
 

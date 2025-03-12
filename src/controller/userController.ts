@@ -44,6 +44,7 @@ const userController = {
             else {
                 const userFound = response.body[0];
                 const isPasswordCorrect = await compareHash(password, userFound.password);
+     
 
                 if (isPasswordCorrect) {
                     const authToken = Auth.generateToken({
